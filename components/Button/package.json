@@ -1,0 +1,23 @@
+{
+  "name": "@thedesignsystem/button",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gstvribs/monorepo-react-component-library.git"
+  },
+  "author": {
+    "name": "Gustavo Ribeiro",
+    "email": "gu_ribeiro@live.com",
+    "url": "https://twitter.com/gstvribs"
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "cross-env webpack -p --config ../../webpack.config.js",
+    "clean": "rimraf dist && rimraf node_modules && rimraf package-lock.json"
+  },
+  "peerDependencies": {
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2"
+  }
+}

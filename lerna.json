@@ -1,0 +1,24 @@
+{
+  "packages": ["components/*"],
+  "version": "independent",
+  "npmClient": "npm",
+  "command": {
+    "version": {
+      "conventionalCommits": true,
+      "changelogPreset": "conventional-changelog-angular"
+    },
+    "publish": {
+      "ignoreChanges": [
+        "ignored-file",
+        "**/__fixtures__/**",
+        "**/__tests__/**",
+        "*.md",
+        "*.json",
+        "*.stories.js"
+      ],
+      "conventionalCommits": true,
+      "access": "public",
+      "message": "chore(release): publish"
+    }
+  }
+}
