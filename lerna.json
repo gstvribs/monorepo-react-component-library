@@ -4,20 +4,18 @@
   "npmClient": "npm",
   "command": {
     "version": {
+      "changelogPreset": "conventional-changelog-angular",
       "conventionalCommits": true,
-      "changelogPreset": "conventional-changelog-angular"
+      "allowBranch": ["master", "release/*"]
     },
     "publish": {
       "ignoreChanges": [
         "ignored-file",
         "**/__fixtures__/**",
         "**/__tests__/**",
-        "*.md",
-        "*.json",
-        "*.stories.js"
+        "*.spec.tsx",
+        "*.stories.tsx"
       ],
-      "conventionalCommits": true,
-      "access": "public",
       "message": "chore(release): publish"
     }
   }

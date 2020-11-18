@@ -1,0 +1,12 @@
+.test-component {
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 16px;
+  width: 360px;
+  text-align: center;
+
+  &.test-component-secondary {
+    background-color: #000;
+    color: #fff;
+  }
+}

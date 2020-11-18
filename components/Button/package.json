@@ -11,13 +11,16 @@
     "url": "https://twitter.com/gstvribs"
   },
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "build/main.js",
   "scripts": {
-    "build": "cross-env webpack -p --config ../../webpack.config.js",
+    "build": "cross-env webpack -p --config ../../webpack.config.js --mode production",
     "clean": "rimraf dist && rimraf node_modules && rimraf package-lock.json"
   },
   "peerDependencies": {
     "react": "^16.8.2",
     "react-dom": "^16.8.2"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2"
   }
 }

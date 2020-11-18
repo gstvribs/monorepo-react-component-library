@@ -3,24 +3,23 @@
   "version": "0.0.0",
   "scripts": {
     "commit": "git-cz",
-    "build": "bash scripts/build.sh",
+    "build": "npm run lerna:build",
+    "build:static": "bash scripts/build.sh",
     "format": "prettier --write components/**/*.{js,ts,scss,json}",
-    "start:storybook": "start-storybook -p 9001 -c .storybook",
-    "build:storybook": "build-storybook -c .storybook -s .storybook/public -o dist/",
-    "build:components": "lerna run build",
-    "clean:components": "lerna run clean",
     "publish:prepare": "bash scripts/pre-publish.sh",
     "publish:local": "npm run publish:prepare && lerna publish --contents dist --registry=http://localhost:4873",
-    "publish:ci": "npm run publish:prepare && lerna publish --contents dist --yes",
-    "package:dump": "npm run lerna:build && lerna publish from-package --contents dist --registry=http://localhost:4873",
+    "start:storybook": "start-storybook -p 9001 -c .storybook",
+    "build:storybook": "build-storybook -c .storybook -s .storybook/public -o dist/",
     "lint:all": "npm run lint:ts && npm run lint:scss",
-    "lint:ts": "eslint -c .eslintrc.json ./components/ --quiet --ext .ts",
-    "lint:ts:fix": "eslint -c .eslintrc.json ./components/ --quiet --ext .ts --fix",
-    "lint:scss": "stylelint **/*.scss --config .stylelintrc.json --syntax scss",
-    "lint:scss:fix": "stylelint **/*.scss --config .stylelintrc.json --syntax scss --fix",
+    "lint:ts": "eslint -c .eslintrc ./components/ --quiet --ext .ts",
+    "lint:ts:fix": "eslint -c .eslintrc ./components/ --quiet --ext .ts --fix",
+    "lint:scss": "stylelint **/*.scss --config .stylelintrc --syntax scss",
+    "lint:scss:fix": "stylelint **/*.scss --config .stylelintrc --syntax scss --fix",
     "registry:local": "verdaccio",
     "registry:auth": "npm config set registry http://localhost:4873/ && npm adduser --registry http://localhost:4873/ && npm run npm:reset",
     "registry:reset": "npm config set registry https://registry.npmjs.org/",
+    "registry:dump": "npm run lerna:build && lerna publish from-package --contents dist --registry=http://localhost:4873",
+    "lerna:bootstrap": "lerna bootstrap --no-ci --hoist",
     "lerna:list": "lerna ls",
     "lerna:list:changed": "lerna list --since",
     "lerna:build": "lerna run build",
@@ -29,34 +28,63 @@
     "lerna:clean:artifacts": "lerna run clean --parallel",
     "lerna:clean:packages": "lerna clean --yes",
     "lerna:clean:root": "rimraf node_modules && rimraf dist",
-    "postinstall": "lerna bootstrap --no-ci --hoist"
+    "postinstall": "npm run lerna:bootstrap"
   },
-  "devDependencies": {
-    "@babel/core": "^7.2.2",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "dependencies": {
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.2",
+    "@types/jest": "^24.0.24",
+    "@types/react": "^16.9.12",
+    "@types/react-dom": "^16.9.8",
     "autoprefixer": "^9.4.7",
-    "babel-loader": "^8.0.5",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
-    "lerna": "^3.13.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
+    "sass": "^1.26.10",
     "node-sass": "^4.11.0",
-    "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "postcss-loader": "^3.0.0",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-jsdoc": "^27.1.2",
     "eslint-plugin-prefer-arrow": "^1.2.1",
     "eslint-plugin-prettier": "^3.1.4",
+    "ts-jest": "^24.2.0",
+    "ts-loader": "^8.0.1",
+    "typescript": "^3.7.2",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3"
   },
-  "dependencies": {
-    "@storybook/cli": "^4.1.13",
-    "@storybook/react": "^4.1.13",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2"
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@lerna/filter-options": "^3.20.0",
+    "@storybook/addon-actions": "^6.0.22",
+    "@storybook/addon-essentials": "^6.0.22",
+    "@storybook/addon-links": "^6.0.22",
+    "@storybook/node-logger": "^6.0.22",
+    "@storybook/react": "^6.0.22",
+    "@storybook/cli": "^6.0.22",
+    "babel-loader": "^8.0.5",
+    "lerna": "^3.22.1",
+    "husky": "^4.3.0",
+    "react-is": "^16.13.1",
+    "verdaccio": "^4.6.2"
   }
 }

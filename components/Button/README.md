@@ -2,4 +2,4 @@
 
 ## Usage
 
-Import component with: `import Button from '@thedesignsystem/button';`
+Import component with: `import ButtonComponent from '@thedesignsystem/button';`
