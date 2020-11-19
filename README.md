@@ -35,18 +35,9 @@ Local setup to run this project locally
 
 ### Configuration
 
-- 1. Install all the dependencies: `npm i`
-- 2. You can see the components of this repo in:
-  - 2.2. Storybook by running `npm run start:storybook`
-
-## Configuring this project and how to install them at your project
-
-First of all, your repository needs to be looking at the npm private repository, for that, create a `.npmrc` file at the root of your project and add the private repository:
-
-```
-registry = https://registry.npmjs.org/
-@thedesignsystem:registry=http://localhost:4873/
-```
+- Install all the dependencies: `npm i`
+- You can see the components of this repo in:
+  - Storybook by running `npm run start:storybook`
 
 ### Installing components
 
