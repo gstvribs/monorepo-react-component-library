@@ -5,7 +5,7 @@
     "commit": "git-cz",
     "build": "npm run lerna:build",
     "build:static": "bash scripts/build.sh",
-    "format": "prettier --write components/**/*.{js,ts,scss,json}",
+    "format": "prettier --write components/**/*.{js,ts,tsx,scss,json}",
     "publish:prepare": "bash scripts/pre-publish.sh",
     "publish:local": "npm run publish:prepare && lerna publish --contents dist --registry=http://localhost:4873",
     "start:storybook": "start-storybook -p 9001 -c .storybook",
