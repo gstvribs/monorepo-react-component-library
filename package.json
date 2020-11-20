@@ -5,12 +5,13 @@
     "commit": "git-cz",
     "build": "npm run lerna:build",
     "build:static": "bash scripts/build.sh",
+    "test": "npm run lerna:test",
+    "lint": "npm run lint:ts && npm run lint:scss",
     "format": "prettier --write components/**/*.{js,ts,tsx,scss,json}",
     "publish:prepare": "bash scripts/pre-publish.sh",
     "publish:local": "npm run publish:prepare && lerna publish --contents dist --registry=http://localhost:4873",
     "start:storybook": "start-storybook -p 9001 -c .storybook",
     "build:storybook": "build-storybook -c .storybook -s .storybook/public -o dist/",
-    "lint:all": "npm run lint:ts && npm run lint:scss",
     "lint:ts": "eslint -c .eslintrc ./components/ --quiet --ext .ts",
     "lint:ts:fix": "eslint -c .eslintrc ./components/ --quiet --ext .ts --fix",
     "lint:scss": "stylelint **/*.scss --config .stylelintrc --syntax scss",
@@ -19,11 +20,13 @@
     "registry:auth": "npm config set registry http://localhost:4873/ && npm adduser --registry http://localhost:4873/ && npm run npm:reset",
     "registry:reset": "npm config set registry https://registry.npmjs.org/",
     "registry:dump": "npm run lerna:build && lerna publish from-package --contents dist --registry=http://localhost:4873",
-    "lerna:bootstrap": "lerna bootstrap --no-ci --hoist",
+    "lerna:bootstrap": "lerna bootstrap --hoist",
     "lerna:list": "lerna ls",
     "lerna:list:changed": "lerna list --since",
     "lerna:build": "lerna run build",
     "lerna:build:changed": "lerna run build --since",
+    "lerna:test": "lerna run test",
+    "lerna:test:changed": "lerna run test --since",
     "lerna:clean": "npm run lerna:clean:artifacts && npm run lerna:clean:packages && npm run lerna:clean:root",
     "lerna:clean:artifacts": "lerna run clean --parallel",
     "lerna:clean:packages": "lerna clean --yes",
@@ -37,7 +40,8 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run build && npm run lint && npm run test"
     }
   },
   "dependencies": {
@@ -78,12 +82,19 @@
     "@storybook/addon-actions": "^6.0.22",
     "@storybook/addon-essentials": "^6.0.22",
     "@storybook/addon-links": "^6.0.22",
+    "@storybook/cli": "^6.0.22",
     "@storybook/node-logger": "^6.0.22",
     "@storybook/react": "^6.0.22",
-    "@storybook/cli": "^6.0.22",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
     "babel-loader": "^8.0.5",
-    "lerna": "^3.22.1",
+    "eslint-plugin-react": "^7.21.5",
     "husky": "^4.3.0",
+    "lerna": "^3.22.1",
+    "stylelint": "^13.6.0",
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-scss": "^3.17.2",
     "react-is": "^16.13.1",
     "verdaccio": "^4.6.2"
   }

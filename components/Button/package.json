@@ -1,6 +1,9 @@
 {
   "name": "@thedesignsystem/button",
   "version": "0.0.0",
+  "publishConfig": {
+    "directory": "dist"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gstvribs/monorepo-react-component-library.git"
@@ -11,9 +14,12 @@
     "url": "https://twitter.com/gstvribs"
   },
   "license": "MIT",
-  "main": "build/main.js",
+  "types": "dist/index.d.ts",
+  "main": "dist/main.js",
   "scripts": {
     "build": "cross-env webpack -p --config ../../webpack.config.js --mode production",
+    "test": "jest button --config=../../jest.config.js",
+    "test:watch": "jest button --config=../../jest.config.js --watch",
     "clean": "rimraf dist && rimraf node_modules && rimraf package-lock.json"
   },
   "peerDependencies": {

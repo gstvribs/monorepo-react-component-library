@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
+    "rootDir": "./components/",
+    "outDir": "./dist/",
     "esModuleInterop": true,
     "declaration": true,
     "downlevelIteration": true,
